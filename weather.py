@@ -19,8 +19,8 @@ class Weather():
                 retValue["error"] = errorMessage
                 return json.dumps(retValue)
             else:
-                temp = jsondata["main"]["temp"]
-                retValue["error"]= errorMessage
+                temp = int(jsondata["main"]["temp"] - 273.15)                
+                retValue["error"]= "0"
                 retValue["temp"] = temp
             return json.dumps(retValue)             
         
