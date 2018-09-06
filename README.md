@@ -1,2 +1,1 @@
-Simple Flask application for weather 
-it gets weather data from openweathermap.org
+Simple Flask application for weather. It gets weather data from openweathermap.org
