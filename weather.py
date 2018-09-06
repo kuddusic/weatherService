@@ -1,5 +1,5 @@
 import json
-import urllib
+import urllib2
 
 class Weather():
     def __init__(self):
@@ -28,15 +28,17 @@ class Weather():
         errorMessage = None
         jsondata = None
         try:
-            response = urllib.urlopen(url)
+            response = urllib2.urlopen(url)
             data = response.read()
-        except urllib.HTTPError as e:
-            errorMessage = "Exception:%s,%s" % (e.code,e.read)
+        except urllib2.HTTPError as e:
+            errorMessage = "Exception:%s,%s" % (e.code,e.read())
+            return (jsondata,errorMessage)
         except Exception as e:
             errorMessage = "URLLib Exception:%s" % str(e)
+            return (jsondata,errorMessage)
         try:
             jsondata = json.loads(data)            
-        except json.JSONDecodeError as e:
+        except ValueError as e:
             errorMessage = "JSON Decode Error: %s on pos:%d, col:%d" % (e.msg, e.pos,e.colno)
         if jsondata["cod"]!=200:
             errorMessage = jsondata["message"]
